@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SCBSettingsViewController : UIViewController
+<
+    UIAlertViewDelegate
+>
 
 @end

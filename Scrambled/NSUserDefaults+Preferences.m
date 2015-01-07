@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 Sasha. All rights reserved.
 //
 
-#define kPreferencesAutoProgressDifficulty @"kPreferencesAutoProgressDifficulty"
-#define kPreferencesRotationEnabled @"kPreferencesRotationEnabled"
-#define kPreferencesPreferedDifficulty @"kPreferencesPreferedDifficulty"
 
 #import "NSUserDefaults+Preferences.h"
 
@@ -41,7 +38,7 @@
 }
 - (NSInteger)preferedDifficulty
 {
-    return [[[NSUserDefaults standardUserDefaults] objectForKey:kPreferencesRotationEnabled] integerValue];
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:kPreferencesPreferedDifficulty] integerValue];
 }
 
 @end

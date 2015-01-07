@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SCBContainerViewController.h"
+#import "NSUserDefaults+Preferences.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kPreferencesAutoProgressDifficulty : @YES,
+                                                              kPreferencesRotationEnabled : @NO,
+                                                              kPreferencesPreferedDifficulty : @36}];
     
     SCBContainerViewController *container = [SCBContainerViewController new];
     self.window.rootViewController = container;

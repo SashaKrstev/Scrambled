@@ -6,6 +6,12 @@
 //  Copyright (c) 2015 Sasha. All rights reserved.
 //
 
+#define kPreferencesAutoProgressDifficulty @"kPreferencesAutoProgressDifficulty"
+#define kPreferencesRotationEnabled @"kPreferencesRotationEnabled"
+#define kPreferencesPreferedDifficulty @"kPreferencesPreferedDifficulty"
+
+#define kNotificationPreferencesChanged @"kNotificationPreferencesChanged"
+
 #import <Foundation/Foundation.h>
 
 @interface NSUserDefaults (Preferences)
