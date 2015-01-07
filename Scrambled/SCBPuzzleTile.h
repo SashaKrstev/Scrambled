@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SCBPuzzleTile : UIView
+@interface SCBPuzzleTile : UIImageView
+
+@property (nonatomic, readonly) BOOL isInPlace;
 
 @end
