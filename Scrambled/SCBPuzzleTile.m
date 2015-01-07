@@ -10,6 +10,7 @@
 @interface SCBPuzzleTile ()
 {
     CGRect originalFrame;
+    NSInteger rotation;
 }
 @property (nonatomic, readwrite) BOOL isInPlace;
 
@@ -25,6 +26,7 @@
         originalFrame = frame;
         self.userInteractionEnabled = YES;
         self.contentMode = UIViewContentModeScaleToFill;
+        rotation = 0;
     }
     return self;
 }
@@ -35,9 +37,37 @@
     [self updateInPlace];
 }
 
+- (void)rotateTile
+{
+    [self rotateTile:rotation + 1];
+}
+
+- (void)rotateTile:(NSInteger)steps
+{
+    NSInteger rotationStep = steps % 4;
+    NSLog(@"rotationStep %d", rotationStep);
+    CGRect startingFrame = self.frame;
+    CGAffineTransform rotationTransform = CGAffineTransformIdentity;
+    switch (rotationStep) {
+        case 1:
+            rotationTransform = CGAffineTransformMakeRotation(M_PI_2);
+            break;
+        case 2:
+            rotationTransform = CGAffineTransformMakeRotation(M_PI);
+            break;
+        case 3:
+            rotationTransform = CGAffineTransformMakeRotation(M_PI_2 * 3);
+            break;
+    }
+    self.transform = rotationTransform;
+    self.frame = startingFrame;
+    rotation = rotationStep;
+    [self updateInPlace];
+}
+
 - (void)updateInPlace
 {
-    self.isInPlace = [self frame:self.frame isEqualToFrame:originalFrame];
+    self.isInPlace = [self frame:self.frame isEqualToFrame:originalFrame] && rotation == 0;
 }
 
 - (BOOL)frame:(CGRect)rect1 isEqualToFrame:(CGRect)rect2

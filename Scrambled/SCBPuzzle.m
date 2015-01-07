@@ -74,9 +74,16 @@
     for (NSValue* frameValue in frameValues)
     {
         SCBPuzzleTile* tile = [[SCBPuzzleTile alloc] initWithFrame: frameValue.CGRectValue];
+        
         UIPanGestureRecognizer* panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
         panRecognizer.delegate = self;
         [tile addGestureRecognizer: panRecognizer];
+        
+        UITapGestureRecognizer *rotationGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onDoubleTap:)];
+        rotationGesture.delegate = self;
+        rotationGesture.numberOfTapsRequired = 2;
+        [tile addGestureRecognizer:rotationGesture];
+        
         [tiles addObject: tile];
         [self addSubview:tile];
     }
@@ -103,9 +110,12 @@
         [UIView animateWithDuration:0.25 delay:delay options:(UIViewAnimationOptionCurveEaseIn) animations:^{
             tile.transform = CGAffineTransformMakeTranslation(-10, 0);
         } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.25 delay:0 options:(UIViewAnimationOptionCurveEaseIn|UIViewAnimationOptionBeginFromCurrentState) animations:^{
+            [UIView animateWithDuration:0.25
+                                  delay:0
+                                options:(UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState)
+                             animations:^{
                 tile.transform = CGAffineTransformIdentity;
-            }completion:^(BOOL finished) {
+            } completion:^(BOOL finished) {
                 if (completion) {
                     completion();
                 }
@@ -192,6 +202,16 @@
     return !gestureInProgress;
 }
 
+- (void)onDoubleTap:(UITapGestureRecognizer *)gesture
+{
+    SCBPuzzleTile *tile = (SCBPuzzleTile *)gesture.view;
+    [UIView animateWithDuration:0.25 animations:^{
+        [tile rotateTile];
+    } completion:^(BOOL finished) {
+        [self checkAllFrames];
+    }];
+}
+
 - (void)onPan:(UIPanGestureRecognizer*)gesture
 {
     switch (gesture.state)
@@ -206,15 +226,12 @@
         case UIGestureRecognizerStateChanged:
         {
             CGPoint translation = [gesture translationInView:self];
-            gesture.view.transform = CGAffineTransformMakeTranslation(translation.x, translation.y);
+            gesture.view.frame = CGRectOffset(sourceFrame, translation.x, translation.y);
         }
             break;
         case UIGestureRecognizerStateCancelled:
-            gesture.view.transform = CGAffineTransformIdentity;
-            gestureInProgress = NO;
-            break;
         case UIGestureRecognizerStateFailed:
-            gesture.view.transform = CGAffineTransformIdentity;
+            gesture.view.frame = sourceFrame;
             gestureInProgress = NO;
             break;
         case UIGestureRecognizerStateRecognized:
@@ -237,7 +254,6 @@
             if (shouldSwap)
             {
                 [UIView animateWithDuration:0.25 animations:^{
-                    gesture.view.transform = CGAffineTransformIdentity;
                     gesture.view.frame = sourceTile.frame;
                     sourceTile.frame = sourceFrame;
                     
@@ -248,14 +264,14 @@
             else
             {
                 [UIView animateWithDuration:0.25 animations:^{
-                    gesture.view.transform = CGAffineTransformIdentity;
+                    gesture.view.frame = sourceFrame;
                 }];
             }
             gestureInProgress = NO;
         }
             break;
         default:
-            gesture.view.transform = CGAffineTransformIdentity;
+            gesture.view.frame = sourceFrame;
             gestureInProgress = NO;
             break;
     }

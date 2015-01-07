@@ -10,6 +10,10 @@
 
 @interface SCBPuzzleTile : UIImageView
 
+- (void)rotateTile;
+
+- (void)rotateTile:(NSInteger)steps;
+
 @property (nonatomic, readonly) BOOL isInPlace;
 
 @end
