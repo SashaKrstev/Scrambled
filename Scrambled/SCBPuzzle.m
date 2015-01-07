@@ -98,23 +98,24 @@
         [tile setImage: [self imageByCroppingImage:self.image withRect:[self multiplyRect:tile.frame withfloat:ratio]]];
     }
     [self scramlbe];
-    
-    for (SCBPuzzleTile* tile in tiles)
-    {
-        tile.transform = CGAffineTransformMakeTranslation(-640, 0);
-    }
+
     for (SCBPuzzleTile* tile in tiles)
     {
         float delay = (320-(tile.frame.origin.x+tile.frame.size.width+640))/640.0;
         NSLog(@"delay %f",delay);
-        [UIView animateWithDuration:0.25 delay:delay options:(UIViewAnimationOptionCurveEaseIn) animations:^{
-            tile.transform = CGAffineTransformMakeTranslation(-10, 0);
+        __block CGRect fromFrame = tile.frame;
+        tile.frame = CGRectOffset(fromFrame, -640, 0);
+        [UIView animateWithDuration:0.25
+                              delay:delay
+                            options:(UIViewAnimationOptionCurveEaseIn)
+                         animations:^{
+                             tile.frame = CGRectOffset(fromFrame, -10, 0);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.25
                                   delay:0
                                 options:(UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState)
                              animations:^{
-                tile.transform = CGAffineTransformIdentity;
+                                 tile.frame = fromFrame;
             } completion:^(BOOL finished) {
                 if (completion) {
                     completion();
