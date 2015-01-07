@@ -8,7 +8,7 @@
 
 #import "SCBContainerViewController.h"
 #import "SCBSettingsViewController.h"
-#import "SCBPuzzleContainer.h"
+#import "SCBPuzzle.h"
 #import <Masonry/Masonry.h>
 
 @interface SCBContainerViewController ()
@@ -16,7 +16,7 @@
     SCBPuzzleDelegate
 >
 {
-    SCBPuzzleContainer *puzzle;
+    SCBPuzzle *puzzle;
     UIView *youwinview;
 }
 @end
@@ -48,7 +48,7 @@
     youwinview.hidden = YES;
     [self.view addSubview: youwinview];
     
-    puzzle = [SCBPuzzleContainer new];
+    puzzle = [SCBPuzzle new];
     puzzle.delegate = self;
     [self.view addSubview:puzzle];
     
@@ -104,7 +104,7 @@
 
 #pragma mark - SCBPuzzleDelegate
 
-- (void)puzzleSuccessfulyCompleted:(SCBPuzzleContainer *)puzzle
+- (void)puzzleSuccessfulyCompleted:(SCBPuzzle *)puzzle
 {
     [self flashYouWin];
 }
