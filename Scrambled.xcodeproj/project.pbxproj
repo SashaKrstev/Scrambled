@@ -14,6 +14,10 @@
 		D9E3696B1A5D3D78003A91FD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E3696A1A5D3D78003A91FD /* Images.xcassets */; };
 		D9E3696E1A5D3D78003A91FD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9E3696C1A5D3D78003A91FD /* LaunchScreen.xib */; };
 		D9E3697A1A5D3D78003A91FD /* ScrambledTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E369791A5D3D78003A91FD /* ScrambledTests.m */; };
+		D9E369871A5D44F3003A91FD /* SCBPuzzleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E369861A5D44F3003A91FD /* SCBPuzzleContainer.m */; };
+		D9E3698A1A5D455F003A91FD /* SCBPuzzleTile.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E369891A5D455F003A91FD /* SCBPuzzleTile.m */; };
+		D9E3698D1A5D4747003A91FD /* SCBFrameProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E3698C1A5D4747003A91FD /* SCBFrameProvider.m */; };
+		D9E3698F1A5D4A6E003A91FD /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9E3698E1A5D4A6E003A91FD /* background@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +45,13 @@
 		D9E369731A5D3D78003A91FD /* ScrambledTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrambledTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9E369781A5D3D78003A91FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9E369791A5D3D78003A91FD /* ScrambledTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrambledTests.m; sourceTree = "<group>"; };
+		D9E369851A5D44F3003A91FD /* SCBPuzzleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBPuzzleContainer.h; sourceTree = "<group>"; };
+		D9E369861A5D44F3003A91FD /* SCBPuzzleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBPuzzleContainer.m; sourceTree = "<group>"; };
+		D9E369881A5D455F003A91FD /* SCBPuzzleTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBPuzzleTile.h; sourceTree = "<group>"; };
+		D9E369891A5D455F003A91FD /* SCBPuzzleTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBPuzzleTile.m; sourceTree = "<group>"; };
+		D9E3698B1A5D4747003A91FD /* SCBFrameProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBFrameProvider.h; sourceTree = "<group>"; };
+		D9E3698C1A5D4747003A91FD /* SCBFrameProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBFrameProvider.m; sourceTree = "<group>"; };
+		D9E3698E1A5D4A6E003A91FD /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		DA5CF9E079245F4FB5458863 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,11 +107,14 @@
 			children = (
 				D9E369611A5D3D78003A91FD /* AppDelegate.h */,
 				D9E369621A5D3D78003A91FD /* AppDelegate.m */,
-				D9E369641A5D3D78003A91FD /* SCBContainerViewController.h */,
-				D9E369651A5D3D78003A91FD /* SCBContainerViewController.m */,
+				D9E369831A5D44B8003A91FD /* ViewControllers */,
+				D9E3698E1A5D4A6E003A91FD /* background@2x.png */,
 				D9E3696A1A5D3D78003A91FD /* Images.xcassets */,
+				D9E369841A5D44DA003A91FD /* Views */,
 				D9E3696C1A5D3D78003A91FD /* LaunchScreen.xib */,
 				D9E3695D1A5D3D78003A91FD /* Supporting Files */,
+				D9E3698B1A5D4747003A91FD /* SCBFrameProvider.h */,
+				D9E3698C1A5D4747003A91FD /* SCBFrameProvider.m */,
 			);
 			path = Scrambled;
 			sourceTree = "<group>";
@@ -129,6 +143,26 @@
 				D9E369781A5D3D78003A91FD /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D9E369831A5D44B8003A91FD /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D9E369641A5D3D78003A91FD /* SCBContainerViewController.h */,
+				D9E369651A5D3D78003A91FD /* SCBContainerViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D9E369841A5D44DA003A91FD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D9E369851A5D44F3003A91FD /* SCBPuzzleContainer.h */,
+				D9E369861A5D44F3003A91FD /* SCBPuzzleContainer.m */,
+				D9E369881A5D455F003A91FD /* SCBPuzzleTile.h */,
+				D9E369891A5D455F003A91FD /* SCBPuzzleTile.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		E64939B83E2BA8FD14F95EB3 /* Pods */ = {
@@ -224,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9E3696E1A5D3D78003A91FD /* LaunchScreen.xib in Resources */,
+				D9E3698F1A5D4A6E003A91FD /* background@2x.png in Resources */,
 				D9E3696B1A5D3D78003A91FD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,7 +310,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9E369871A5D44F3003A91FD /* SCBPuzzleContainer.m in Sources */,
 				D9E369661A5D3D78003A91FD /* SCBContainerViewController.m in Sources */,
+				D9E3698A1A5D455F003A91FD /* SCBPuzzleTile.m in Sources */,
+				D9E3698D1A5D4747003A91FD /* SCBFrameProvider.m in Sources */,
 				D9E369631A5D3D78003A91FD /* AppDelegate.m in Sources */,
 				D9E369601A5D3D78003A91FD /* main.m in Sources */,
 			);

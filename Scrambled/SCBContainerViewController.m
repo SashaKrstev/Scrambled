@@ -7,6 +7,7 @@
 //
 
 #import "SCBContainerViewController.h"
+#import <Masonry/Masonry.h>
 
 @interface SCBContainerViewController ()
 
@@ -14,10 +15,16 @@
 
 @implementation SCBContainerViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    self.view.backgroundColor = [UIColor greenColor];
+    
+    UIImageView* backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
+    backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:backgroundImage];
+    [backgroundImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
