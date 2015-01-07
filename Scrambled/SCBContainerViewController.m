@@ -8,10 +8,17 @@
 
 #import "SCBContainerViewController.h"
 #import "SCBSettingsViewController.h"
+#import "SCBPuzzleContainer.h"
 #import <Masonry/Masonry.h>
 
 @interface SCBContainerViewController ()
-
+<
+    SCBPuzzleDelegate
+>
+{
+    SCBPuzzleContainer *puzzle;
+    UIView *youwinview;
+}
 @end
 
 @implementation SCBContainerViewController
@@ -34,6 +41,25 @@
     [settingsButton addTarget:self action:@selector(onSettingsButton:) forControlEvents:(UIControlEventTouchUpInside)];
     settingsButton.adjustsImageWhenDisabled = NO;
     [bottomBar addSubview:settingsButton];
+
+    youwinview = [UIView new];
+    youwinview.backgroundColor = [UIColor whiteColor];
+    [youwinview addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onYouWinTap:)]];
+    youwinview.hidden = YES;
+    [self.view addSubview: youwinview];
+    
+    puzzle = [SCBPuzzleContainer new];
+    puzzle.delegate = self;
+    [self.view addSubview:puzzle];
+    
+    [puzzle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.view);
+        make.bottom.equalTo(bottomBar.mas_top);
+    }];
+
+    [youwinview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(puzzle);
+    }];
     
     [settingsButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(settingsButton.mas_width);
@@ -50,13 +76,75 @@
         make.left.right.bottom.equalTo(self.view);
         make.height.equalTo(@40);
     }];
+    
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    if (!puzzle.image) {
+        puzzle.image = [UIImage imageNamed:@"theimage"];
+        [puzzle animateBuildupWithCompletion:nil];
+    }
 }
 
 #pragma mark - Actions
 
 - (void)onSettingsButton:(UIButton *)sender
 {
-    
+    SCBSettingsViewController *settingsVC = [SCBSettingsViewController new];
+    UINavigationController *navWrap = [[UINavigationController alloc] initWithRootViewController:settingsVC];
+    [self presentViewController:navWrap animated:YES completion:nil];
+}
+
+- (void)onYouWinTap:(id)sender
+{
+    [self showNextImage];
+}
+
+#pragma mark - SCBPuzzleDelegate
+
+- (void)puzzleSuccessfulyCompleted:(SCBPuzzleContainer *)puzzle
+{
+    [self flashYouWin];
+}
+
+#pragma mark - Internal methods
+
+- (void)showNextImage
+{
+    NSString* imagename = [NSString stringWithFormat:@"%d.jpg",arc4random()%389];
+    NSLog(@"using image %@",imagename);
+    UIImage* image = [UIImage imageNamed:imagename];
+    if (!image)
+    {
+        NSLog(@"failed loading image");
+        [self showNextImage];
+    } else {
+        [puzzle animateTeardownWithCompletion:^{
+            puzzle.currentLevel += 1;
+            puzzle.image = [UIImage imageNamed:imagename];
+            
+            [puzzle animateBuildupWithCompletion:^{
+                youwinview.hidden = YES;
+            }];
+        }];
+    }
+}
+
+- (void)flashYouWin
+{
+    youwinview.hidden = NO;
+    [self.view bringSubviewToFront:youwinview];
+    [UIView animateWithDuration:0.25 animations:^{
+        youwinview.alpha = 0.8;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.25 animations:^{
+            youwinview.alpha = 0.1;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
 }
 
 @end
