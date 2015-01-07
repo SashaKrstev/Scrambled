@@ -22,7 +22,7 @@
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{kPreferencesAutoProgressDifficulty : @YES,
                                                               kPreferencesRotationEnabled : @NO,
-                                                              kPreferencesPreferedDifficulty : @36}];
+                                                              kPreferencesPreferedDifficulty : @5}];
     
     SCBContainerViewController *container = [SCBContainerViewController new];
     self.window.rootViewController = container;

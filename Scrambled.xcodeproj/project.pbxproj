@@ -18,7 +18,6 @@
 		D9E3698A1A5D455F003A91FD /* SCBPuzzleTile.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E369891A5D455F003A91FD /* SCBPuzzleTile.m */; };
 		D9E3698D1A5D4747003A91FD /* SCBFrameProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E3698C1A5D4747003A91FD /* SCBFrameProvider.m */; };
 		D9E369921A5D4CCC003A91FD /* SCBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E369911A5D4CCC003A91FD /* SCBSettingsViewController.m */; };
-		D9E3699A1A5D6B9C003A91FD /* theimage.png in Resources */ = {isa = PBXBuildFile; fileRef = D9E369991A5D6B9C003A91FD /* theimage.png */; };
 		D9E36B1A1A5D79D0003A91FD /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9E3699C1A5D79CF003A91FD /* 0.jpg */; };
 		D9E36B1B1A5D79D0003A91FD /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9E3699D1A5D79CF003A91FD /* 1.jpg */; };
 		D9E36B1C1A5D79D0003A91FD /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9E3699E1A5D79CF003A91FD /* 10.jpg */; };
@@ -437,7 +436,6 @@
 		D9E3698C1A5D4747003A91FD /* SCBFrameProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBFrameProvider.m; sourceTree = "<group>"; };
 		D9E369901A5D4CCC003A91FD /* SCBSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBSettingsViewController.h; sourceTree = "<group>"; };
 		D9E369911A5D4CCC003A91FD /* SCBSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBSettingsViewController.m; sourceTree = "<group>"; };
-		D9E369991A5D6B9C003A91FD /* theimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theimage.png; sourceTree = "<group>"; };
 		D9E3699C1A5D79CF003A91FD /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
 		D9E3699D1A5D79CF003A91FD /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		D9E3699E1A5D79CF003A91FD /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpg; sourceTree = "<group>"; };
@@ -876,7 +874,6 @@
 			isa = PBXGroup;
 			children = (
 				D9E3699B1A5D79CF003A91FD /* 1 */,
-				D9E369991A5D6B9C003A91FD /* theimage.png */,
 				D9E369611A5D3D78003A91FD /* AppDelegate.h */,
 				D9E369621A5D3D78003A91FD /* AppDelegate.m */,
 				D9E369831A5D44B8003A91FD /* ViewControllers */,
@@ -1687,7 +1684,6 @@
 				D9E36B311A5D79D0003A91FD /* 119.jpg in Resources */,
 				D9E36C4A1A5D79D0003A91FD /* 374.jpg in Resources */,
 				D9E36BFD1A5D79D0003A91FD /* 304.jpg in Resources */,
-				D9E3699A1A5D6B9C003A91FD /* theimage.png in Resources */,
 				D9E36C691A5D79D0003A91FD /* 54.jpg in Resources */,
 				D9E36C0B1A5D79D0003A91FD /* 317.jpg in Resources */,
 				D9E36BF61A5D79D0003A91FD /* 298.jpg in Resources */,
@@ -1915,6 +1911,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1932,7 +1929,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1957,6 +1954,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1968,7 +1966,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
