@@ -100,8 +100,9 @@
 {
     [super viewDidLayoutSubviews];
     if (!puzzle.image) {
-        puzzle.image = [UIImage imageNamed:@"theimage"];
-        [puzzle animateBuildupWithCompletion:nil];
+        [self showNextImage];
+//        puzzle.image = [UIImage imageNamed:@"theimage"];
+//        [puzzle animateBuildupWithCompletion:nil];
     }
 }
 
@@ -123,6 +124,7 @@
 
 - (void)onPreferencesChangedNotification:(NSNotification *)notification
 {
+    youwinview.hidden = YES;
     puzzle.currentLevel = [[NSUserDefaults standardUserDefaults] preferedDifficulty];
     [puzzle animateTeardownWithCompletion:^{
         [puzzle animateBuildupWithCompletion:nil];
@@ -141,11 +143,9 @@
 - (void)showNextImage
 {
     NSString* imagename = [NSString stringWithFormat:@"%d.jpg",arc4random()%389];
-    NSLog(@"using image %@",imagename);
     UIImage* image = [UIImage imageNamed:imagename];
     if (!image)
     {
-        NSLog(@"failed loading image");
         [self showNextImage];
     } else {
         [puzzle animateTeardownWithCompletion:^{
