@@ -11,6 +11,7 @@
 #import "SCBPuzzleTile.h"
 #import "SCBFrameProvider.h"
 #import <Masonry/Masonry.h>
+#import "NSUserDefaults+Preferences.h"
 
 @implementation SCBPuzzle
 {
@@ -29,7 +30,7 @@
     return self;
 }
 
-- (id)initWithLevel:(NSInteger)level
+- (instancetype)initWithLevel:(NSInteger)level
 {
     self = [super init];
     if (self)
@@ -82,6 +83,7 @@
         UITapGestureRecognizer *rotationGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onDoubleTap:)];
         rotationGesture.delegate = self;
         rotationGesture.numberOfTapsRequired = 2;
+        rotationGesture.enabled = [[NSUserDefaults standardUserDefaults] rotationEnabled];
         [tile addGestureRecognizer:rotationGesture];
         
         [tiles addObject: tile];
@@ -103,6 +105,10 @@
     {
         float delay = (320-(tile.frame.origin.x+tile.frame.size.width+640))/640.0;
         NSLog(@"delay %f",delay);
+        if ([[NSUserDefaults standardUserDefaults] rotationEnabled]) {
+            [tile rotateTile:arc4random() % 4];
+        }
+
         __block CGRect fromFrame = tile.frame;
         tile.frame = CGRectOffset(fromFrame, -640, 0);
         [UIView animateWithDuration:0.25

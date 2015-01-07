@@ -10,6 +10,7 @@
 #import "SCBSettingsViewController.h"
 #import "SCBPuzzle.h"
 #import <Masonry/Masonry.h>
+#import "NSUserDefaults+Preferences.h"
 
 @interface SCBContainerViewController ()
 <
@@ -22,6 +23,22 @@
 @end
 
 @implementation SCBContainerViewController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPreferencesChangedNotification:) name:kNotificationPreferencesChanged object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
@@ -48,7 +65,7 @@
     youwinview.hidden = YES;
     [self.view addSubview: youwinview];
     
-    puzzle = [SCBPuzzle new];
+    puzzle = [[SCBPuzzle alloc] initWithLevel:[[NSUserDefaults standardUserDefaults] preferedDifficulty]];
     puzzle.delegate = self;
     [self.view addSubview:puzzle];
     
@@ -102,6 +119,16 @@
     [self showNextImage];
 }
 
+#pragma mark - Notifications
+
+- (void)onPreferencesChangedNotification:(NSNotification *)notification
+{
+    puzzle.currentLevel = [[NSUserDefaults standardUserDefaults] preferedDifficulty];
+    [puzzle animateTeardownWithCompletion:^{
+        [puzzle animateBuildupWithCompletion:nil];
+    }];
+}
+
 #pragma mark - SCBPuzzleDelegate
 
 - (void)puzzleSuccessfulyCompleted:(SCBPuzzle *)puzzle
@@ -122,7 +149,10 @@
         [self showNextImage];
     } else {
         [puzzle animateTeardownWithCompletion:^{
-            puzzle.currentLevel += 1;
+            if ([[NSUserDefaults standardUserDefaults]autoProgressDifficultyEnabled]) {
+                puzzle.currentLevel += 1;
+            }
+
             puzzle.image = [UIImage imageNamed:imagename];
             
             [puzzle animateBuildupWithCompletion:^{

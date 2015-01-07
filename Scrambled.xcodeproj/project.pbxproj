@@ -401,6 +401,7 @@
 		D9E36C951A5D79D0003A91FD /* 98.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9E36B171A5D79D0003A91FD /* 98.jpg */; };
 		D9E36C961A5D79D0003A91FD /* 99.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9E36B181A5D79D0003A91FD /* 99.jpg */; };
 		D9E36C971A5D79D0003A91FD /* uni.sh in Resources */ = {isa = PBXBuildFile; fileRef = D9E36B191A5D79D0003A91FD /* uni.sh */; };
+		D9E36C9B1A5D9CE2003A91FD /* NSUserDefaults+Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E36C9A1A5D9CE2003A91FD /* NSUserDefaults+Preferences.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -819,6 +820,8 @@
 		D9E36B171A5D79D0003A91FD /* 98.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 98.jpg; sourceTree = "<group>"; };
 		D9E36B181A5D79D0003A91FD /* 99.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 99.jpg; sourceTree = "<group>"; };
 		D9E36B191A5D79D0003A91FD /* uni.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = uni.sh; sourceTree = "<group>"; };
+		D9E36C991A5D9CE2003A91FD /* NSUserDefaults+Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Preferences.h"; sourceTree = "<group>"; };
+		D9E36C9A1A5D9CE2003A91FD /* NSUserDefaults+Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Preferences.m"; sourceTree = "<group>"; };
 		DA5CF9E079245F4FB5458863 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -883,6 +886,8 @@
 				D9E3695D1A5D3D78003A91FD /* Supporting Files */,
 				D9E3698B1A5D4747003A91FD /* SCBFrameProvider.h */,
 				D9E3698C1A5D4747003A91FD /* SCBFrameProvider.m */,
+				D9E36C991A5D9CE2003A91FD /* NSUserDefaults+Preferences.h */,
+				D9E36C9A1A5D9CE2003A91FD /* NSUserDefaults+Preferences.m */,
 			);
 			path = Scrambled;
 			sourceTree = "<group>";
@@ -1856,6 +1861,7 @@
 				D9E369661A5D3D78003A91FD /* SCBContainerViewController.m in Sources */,
 				D9E3698A1A5D455F003A91FD /* SCBPuzzleTile.m in Sources */,
 				D9E3698D1A5D4747003A91FD /* SCBFrameProvider.m in Sources */,
+				D9E36C9B1A5D9CE2003A91FD /* NSUserDefaults+Preferences.m in Sources */,
 				D9E369631A5D3D78003A91FD /* AppDelegate.m in Sources */,
 				D9E369921A5D4CCC003A91FD /* SCBSettingsViewController.m in Sources */,
 				D9E369601A5D3D78003A91FD /* main.m in Sources */,
