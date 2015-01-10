@@ -104,7 +104,6 @@
     for (SCBPuzzleTile* tile in tiles)
     {
         float delay = (320-(tile.frame.origin.x+tile.frame.size.width+640))/640.0;
-        NSLog(@"delay %f",delay);
         if ([[NSUserDefaults standardUserDefaults] rotationEnabled]) {
             [tile rotateTile:arc4random() % 4];
         }

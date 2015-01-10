@@ -12,6 +12,8 @@
 #import <Masonry/Masonry.h>
 #import "NSUserDefaults+Preferences.h"
 
+#define NUMBER_OF_IMAGES 389
+
 @interface SCBContainerViewController ()
 <
     SCBPuzzleDelegate
@@ -19,6 +21,7 @@
 {
     SCBPuzzle *puzzle;
     UIView *youwinview;
+    NSMutableArray *allImageNames;
 }
 @end
 
@@ -29,6 +32,7 @@
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPreferencesChangedNotification:) name:kNotificationPreferencesChanged object:nil];
+        allImageNames = [NSMutableArray new];
     }
     return self;
 }
@@ -101,8 +105,6 @@
     [super viewDidLayoutSubviews];
     if (!puzzle.image) {
         [self showNextImage];
-//        puzzle.image = [UIImage imageNamed:@"theimage"];
-//        [puzzle animateBuildupWithCompletion:nil];
     }
 }
 
@@ -142,23 +144,48 @@
 
 - (void)showNextImage
 {
-    NSString* imagename = [NSString stringWithFormat:@"%d.jpg",arc4random()%389];
-    UIImage* image = [UIImage imageNamed:imagename];
+    if (allImageNames.count == 0) {
+        [self buildUpImageArray];
+    }
+    
+    NSString *imageName;
+    @try {
+        imageName = allImageNames[arc4random() % allImageNames.count];
+    }
+    @catch (NSException *exception) {
+        [self showNextImage];
+        return;
+    }
+    @finally {
+        [allImageNames removeObject:imageName];
+    }
+    UIImage* image = [UIImage imageNamed:imageName];
     if (!image)
     {
         [self showNextImage];
+        NSLog(@"failed loading image %@",imageName);
     } else {
+        NSLog(@"using image %@",imageName);
+        NSLog(@"images left %d %@",allImageNames.count,allImageNames);
         [puzzle animateTeardownWithCompletion:^{
             if ([[NSUserDefaults standardUserDefaults]autoProgressDifficultyEnabled]) {
                 puzzle.currentLevel += 1;
             }
 
-            puzzle.image = [UIImage imageNamed:imagename];
+            puzzle.image = [UIImage imageNamed:imageName];
             
             [puzzle animateBuildupWithCompletion:^{
                 youwinview.hidden = YES;
             }];
         }];
+    }
+}
+
+- (void)buildUpImageArray
+{
+    [allImageNames removeAllObjects];
+    for(int i = 0; i <= NUMBER_OF_IMAGES; i++) {
+        [allImageNames addObject:[NSString stringWithFormat:@"%d.jpg",i]];
     }
 }
 
