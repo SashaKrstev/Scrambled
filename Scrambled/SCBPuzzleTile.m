@@ -45,7 +45,7 @@
 - (void)rotateTile:(NSInteger)steps
 {
     NSInteger rotationStep = steps % 4;
-    NSLog(@"rotationStep %d", rotationStep);
+
     CGRect startingFrame = self.frame;
     CGAffineTransform rotationTransform = CGAffineTransformIdentity;
     switch (rotationStep) {

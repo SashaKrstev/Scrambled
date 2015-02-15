@@ -31,7 +31,10 @@
 {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPreferencesChangedNotification:) name:kNotificationPreferencesChanged object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onPreferencesChangedNotification:)
+                                                     name:kNotificationPreferencesChanged
+                                                   object:nil];
         allImageNames = [NSMutableArray new];
     }
     return self;
@@ -159,6 +162,7 @@
     @finally {
         [allImageNames removeObject:imageName];
     }
+    
     UIImage* image = [UIImage imageNamed:imageName];
     if (!image)
     {

@@ -117,7 +117,6 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"Saving your preferences will reshuffle your current puzzle!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Got it", nil];
     [alert show];
 }
-
 - (void)onSliderValueChanged:(UISlider *)slider
 {
     difficultyLabel.text = [NSString stringWithFormat:@"Starting difficulty:   %d", (int)difficultySlider.value];
@@ -127,7 +126,7 @@
 {
     [autoProgressSwitch setOn:[[NSUserDefaults standardUserDefaults] autoProgressDifficultyEnabled]];
     [rotationSwitch setOn:[[NSUserDefaults standardUserDefaults] rotationEnabled]];
-    NSLog(@"pref %d",[[NSUserDefaults standardUserDefaults] preferedDifficulty]);
+ 
     [difficultySlider setValue:[[NSUserDefaults standardUserDefaults] preferedDifficulty]];
     difficultyLabel.text = [NSString stringWithFormat:@"Starting difficulty:   %d", (int)difficultySlider.value];
 }
