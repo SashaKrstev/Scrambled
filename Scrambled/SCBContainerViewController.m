@@ -12,7 +12,7 @@
 #import <Masonry/Masonry.h>
 #import "NSUserDefaults+Preferences.h"
 
-#define NUMBER_OF_IMAGES 389
+#define NUMBER_OF_IMAGES 115
 
 @interface SCBContainerViewController ()
 <
