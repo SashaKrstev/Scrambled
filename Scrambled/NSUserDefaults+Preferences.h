@@ -12,6 +12,8 @@
 
 #define kNotificationPreferencesChanged @"kNotificationPreferencesChanged"
 
+#define MAX_LEVEL 100
+
 #import <Foundation/Foundation.h>
 
 @interface NSUserDefaults (Preferences)

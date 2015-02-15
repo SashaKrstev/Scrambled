@@ -11,6 +11,10 @@
 
 @interface SCBFrameProvider : NSObject
 
+/**
+ * Returns an Array of NSValues containing CGRects
+ * The CGRects fill the given frame divided by level
+ */
 + (NSArray *)generateFramesForLevel:(NSInteger)level inFrame:(CGRect)frame;
 
 @end

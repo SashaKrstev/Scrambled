@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "SCBFrameProvider.h"
+#import "NSUserDefaults+Preferences.h"
 
 @interface ScrambledTests : XCTestCase
 
@@ -25,15 +27,29 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testFrames
+{
+    for (int i = 0; i< MAX_LEVEL; i++) {
+        NSArray *frames = [SCBFrameProvider generateFramesForLevel:i inFrame:CGRectZero];
+        XCTAssertEqual(frames.count, i+1);
+        for (NSValue *frameValue1 in frames) {
+            for (NSValue *frameValue2 in frames) {
+                CGRect frame1 = frameValue1.CGRectValue;
+                CGRect frame2 = frameValue2.CGRectValue;
+                CGRect intersection = CGRectIntersection(frame1, frame2);
+                XCTAssertEqual(intersection.origin.x, 0);
+                XCTAssertEqual(intersection.origin.y, 0);
+                XCTAssertEqual(intersection.size.width, 0);
+                XCTAssertEqual(intersection.size.height, 0);
+            }
+        }
+    }
 }
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+       [SCBFrameProvider generateFramesForLevel:MAX_LEVEL inFrame:CGRectZero];
     }];
 }
 
