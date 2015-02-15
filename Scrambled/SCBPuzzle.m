@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Sasha. All rights reserved.
 //
 
+#define kExceptionPileUp @"kExceptionPileUp"
+
 #import "SCBPuzzle.h"
 
 #import "SCBPuzzleTile.h"
@@ -18,6 +20,7 @@
     NSArray *frameValues;
     NSMutableArray *tiles;
     CGRect sourceFrame;
+    NSMutableArray *currentTileState;
     BOOL gestureInProgress;
 }
 
@@ -38,7 +41,7 @@
         gestureInProgress = NO;
         self.currentLevel = level;
         tiles = [NSMutableArray new];
-
+        currentTileState = [NSMutableArray new];
     }
     return self;
 }
@@ -154,6 +157,7 @@
         tile.frame = ((NSValue*)temp2[i]).CGRectValue;
         i++;
     }
+    [self saveCurrentTileState];
 }
 
 - (UIImage *)imageByCroppingImage:(UIImage *)image withRect:(CGRect)cropRect
@@ -201,10 +205,52 @@
     }
 }
 
+- (void)verifyFrameAligment
+{
+    for (int i = 0; i < tiles.count; i++) {
+        SCBPuzzleTile *tile1 = tiles[i];
+        for (int j = i+1; j < tiles.count; j++) {
+            SCBPuzzleTile *tile2 = tiles[j];
+            CGRect frame1 = tile1.frame;
+            CGRect frame2 = tile2.frame;
+            CGRect intersection = CGRectIntersection(frame1, frame2);
+            if (CGRectGetHeight(intersection) != 0 && CGRectGetWidth(intersection) != 0) {
+                NSLog(@"Thorwing exception");
+                NSException *exception = [NSException exceptionWithName:kExceptionPileUp
+                                                                 reason:@"More than one tile occupies a given frame"
+                                                               userInfo:@{}];
+                @throw exception;
+            }
+        }
+    }
+}
+
+- (void)saveCurrentTileState
+{
+    [currentTileState removeAllObjects];
+    for (SCBPuzzleTile *tile in tiles) {
+        [currentTileState addObject:[NSValue valueWithCGRect:tile.frame]];
+    }
+}
+
+- (void)restoreTileState
+{
+    int i = 0;
+    for (SCBPuzzleTile *tile in tiles) {
+        NSValue *frameValue = currentTileState[i];
+        tile.frame = frameValue.CGRectValue;
+        i++;
+    }
+}
+
 #pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
+    if (!gestureInProgress) {
+        gestureInProgress = YES;
+        return gestureInProgress;
+    }
     return !gestureInProgress;
 }
 
@@ -259,11 +305,18 @@
             }
             if (shouldSwap)
             {
+  
                 [UIView animateWithDuration:0.25 animations:^{
                     gesture.view.frame = sourceTile.frame;
                     sourceTile.frame = sourceFrame;
-                    
                 } completion:^(BOOL finished) {
+                    @try {
+                        NSLog(@"animation finished %d",finished);
+                        [self verifyFrameAligment];
+                    }
+                    @catch (NSException *exception) {
+                        [self restoreTileState];
+                    }
                     [self checkAllFrames];
                 }];
             }
