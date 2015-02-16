@@ -17,16 +17,33 @@ typedef void (^SCBCompletionBlock)(void);
     UIGestureRecognizerDelegate
 >
 
+/**
+ * Initializes a puzzle with a given level
+ */
 - (id)initWithLevel:(NSInteger)level;
 
+/**
+ * Tears down the current puzzle with animation
+ * completion called when animation is finished
+ */
 - (void)animateTeardownWithCompletion:(SCBCompletionBlock)completion;
 
+/**
+ * Builds up a new puzzle with animation
+ * completion called when animation is finished
+ */
 - (void)animateBuildupWithCompletion:(SCBCompletionBlock)completion;
 
+/**
+ * The current puzzled image
+ */
 @property (nonatomic, strong) UIImage *image;
 
 @property (nonatomic, weak) id<SCBPuzzleDelegate> delegate;
 
+/**
+ * The current puzzle Level
+ */
 @property (nonatomic) NSInteger currentLevel;
 
 @end
