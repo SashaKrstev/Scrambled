@@ -270,7 +270,6 @@
     {
         case UIGestureRecognizerStateBegan:
         {
-            gestureInProgress = YES;
             sourceFrame = gesture.view.frame;
             [self bringSubviewToFront:gesture.view];
         }
